@@ -10,9 +10,8 @@ pipeline {
                 git branch: 'main',                    
                     url: 'https://github.com/DR-Rajasekhar/new-ecomm.git'
                 dir("ecomm_iac") {
-                    git branch: "master",
-                    credentialsId: "RAJA_DR_GIT_KEY",
-                    url: 'https://github.com/DR-Rajasekhar/soft_web_aggregator_iac.git'
+                    git branch: "master",                    
+                    url: 'https://github.com/DR-Rajasekhar/ecomm_iac.git'
                 }
             }  
         }
