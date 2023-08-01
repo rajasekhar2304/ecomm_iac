@@ -18,7 +18,7 @@ pipeline {
         stage('Deploy') {
             steps {                
                 ansiblePlaybook become: true, 
-                credentialsId: 'SOFT_AWS_EC2',
+                credentialsId: 'APP_AWS_EC2',
                 disableHostKeyChecking: true,
                 extras: "-e apps_env=${env.apps_infra_env}",  
                 installation: 'ansible', 
