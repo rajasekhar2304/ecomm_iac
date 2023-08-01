@@ -1,0 +1,33 @@
+pipeline {
+    agent any
+    environment
+	{
+		apps_infra_env = "ecomm_dev"        
+	}
+    stages {                
+        stage("SCM Checkout") {
+            steps {
+                git branch: 'main',                    
+                    url: 'https://github.com/DR-Rajasekhar/new-ecomm.git'
+                dir("ecomm_iac") {
+                    git branch: "master",
+                    credentialsId: "RAJA_DR_GIT_KEY",
+                    url: 'https://github.com/DR-Rajasekhar/soft_web_aggregator_iac.git'
+                }
+            }  
+        }
+        stage('Deploy') {
+            steps {                
+                ansiblePlaybook become: true, 
+                credentialsId: 'SOFT_AWS_EC2',
+                disableHostKeyChecking: true,
+                extras: "-e apps_env=${env.apps_infra_env}",  
+                installation: 'ansible', 
+                inventory: 'ecomm_iac/inventories/dev.inv', 
+                limit: 'EcommAppServer', 
+                playbook: 'ecomm_iac/appDeploy.yml',
+                tags: 'copy_files' 
+            }
+        }        
+    }
+}

@@ -1,0 +1,4 @@
+[JenkinsServers]
+3.111.85.73 ansible_user=ubuntu
+[EcommAppServer]
+43.204.108.131 ansible_user=ubuntu
