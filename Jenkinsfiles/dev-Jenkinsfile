@@ -24,7 +24,7 @@ pipeline {
                 installation: 'ansible', 
                 inventory: 'ecomm_iac/inventories/dev.inv', 
                 limit: 'EcommAppServer', 
-                playbook: 'ecomm_iac/appDeploy.yml',
+                playbook: 'ecomm_iac/appDeploy.yaml',
                 tags: 'copy_files' 
             }
         }        
