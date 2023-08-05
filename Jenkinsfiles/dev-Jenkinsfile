@@ -7,11 +7,12 @@ pipeline {
     stages {                
         stage("SCM Checkout") {
             steps {
-                git branch: 'main',                    
-                    url: 'https://github.com/DR-Rajasekhar/new-ecomm.git'
+                git branch: 'master',                    
+                    credentialsId: "RajaGithubAccess",
+                    url: 'https://github.com/rajasekhar2304/ecomm-new.git'
                 dir("ecomm_iac") {
                     git branch: "master",                    
-                    url: 'https://github.com/DR-Rajasekhar/ecomm_iac.git'
+                    url: 'https://github.com/rajasekhar2304/ecomm_iac.git'
                 }
             }  
         }
@@ -23,7 +24,7 @@ pipeline {
                 extras: "-e apps_env=${env.apps_infra_env}",  
                 installation: 'ansible', 
                 inventory: 'ecomm_iac/inventories/dev.inv', 
-                limit: 'EcommAppServer', 
+                limit: 'Apache-Webserver', 
                 playbook: 'ecomm_iac/appDeploy.yaml',
                 tags: 'copy_files' 
             }
